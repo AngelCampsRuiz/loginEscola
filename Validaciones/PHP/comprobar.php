@@ -1,28 +1,27 @@
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+session_start();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require_once('../../MySql/conexion.php');
-        if(isset($_POST['user']) && isset($_POST['pwd'])){
+        if (isset($_POST['user']) && isset($_POST['pwd'])) {
             $user = trim($_POST['user']);
             $password = trim($_POST['pwd']);
-            try{
-                $stmt = $conn->prepare("SELECT nom, pwd FROM tbl_administracio WHERE nom = ?");
-                $stmt->bind_param("s", $user);
+            try {
+                $stmt = $conexion->prepare("SELECT nom, pwd FROM tbl_administracio WHERE nom = :user");
+                $stmt->bindParam(':user', $user, PDO::PARAM_STR);//Evita inyecciones a la base de datos
                 $stmt->execute();
-                $result = $stmt->get_result();
-                if($result->num_rows > 0){
-                    $row = $result->fetch_assoc();
-                    $hashed_password = $row['pwd'];
-                    if (password_verify($password, $hashed_password)) {
-                        header("Location: pagina_destino.php");
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);//Recupera los nombres que hay en la base de datos
+                if ($row) {
+                    $hashed_password = $row['pwd'];// Si se encuentra un usuario con el nombre introducido se comprueba la contraseña
+                    if (password_verify($password, $hashed_password)) {//Si hay logueado se crea una sesión y se redirecciona a la página de bienvenida
+                        $_SESSION['user'] = $user;
+                        $_SESSION['success'] = true; 
+                        header("Location: ../../Formulario/bienvenida.php");// Devuelve que no existe
                         exit();
-                    } else {
-                        header("Location:../../Formulario/formulario.php?error=Contraseña incorrecta. Por favor, inténtelo de nuevo.");
                     }
                 } else {
-                    header("Location:../../Formulario/formulario.php?error=Usuario no encontrado. Por favor, inténtelo de nuevo.");
+                    header("Location: ../../Formulario/formulario.php?error=2");
+                    exit();
                 }
-                $stmt->close();
-                $conn->close();
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
                 exit();
