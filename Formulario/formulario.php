@@ -10,7 +10,10 @@
 </head>
 
 <body>
+    <header>
+    <img src="../Imagenes/LogoEscuela.jpeg" id="logo">
     <h2 id="iniciar-sesion">Iniciar sesión</h2>
+    </header>
     <form action="validacionPhp.php" method="POST" id="login" onsubmit="return comprobarForm()">
         <label for="user">Usuario:</label><br><br>
         <input type="text" id="user" name="user" onblur="validarUser()" onkeyup="validarUser()"><br>
