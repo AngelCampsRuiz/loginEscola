@@ -1,54 +1,57 @@
-function validarUser(){
-    let user = document.getElementById("user").value;
-    let errorUser = document.getElementById("errorUser");
+function comprobarForm() {
+    var user = document.getElementById('user').value;
+    var pwd = document.getElementById('pwd').value;
 
-    if(user == null || user.length == 0 || /^\s+$/.test(user)){
-        errorUser.textContent = "El campo usuario no puede estar vacío.";
+    if (user == "" || pwd == "") {
+        alert("Debes rellenar todos los campos");
         return false;
-    } else if(!isNaN(user)){
-        errorUser.textContent = "El campo usuario no puede contener números.";
-        return false;
-    } else if(user.length < 2){
-        errorUser.textContent = "El campo usuario debe tener al menos 2 caracteres.";
-        return false;
-    } else {
-        errorUser.textContent = "";
-        return true;
     }
+
+    // Validamos el usuario
+    if (!validarUser()) {
+        return false;
+    }
+
+    // Validamos la contraseña
+    if (!validarPwd()) {
+        return false;
+    }
+
+    return true;
 }
 
-function validarPwd(){
-    let pwd = document.getElementById("pwd").value;
-    let errorPwd = document.getElementById("errorPwd");
+function validarUser() {
+    var user = document.getElementById('user').value;
+    var errorUser = document.getElementById('errorUser');
 
-    if(pwd == null ||  pwd.length == 0 || /^\s+$/.test(pwd)){
-        errorPwd.textContent = "El campo contraseña no puede estar vacío.";
+    if (user.length < 3) {
+        errorUser.innerHTML = "El usuario debe tener al menos 3 caracteres";
         return false;
-    } else if(pwd.length < 4){
-        errorPwd.textContent = "El campo debe tener mas de 4 caracteres.";
-        return false;
-    } else {
-        errorPwd.textContent = "";
-        return true;
     }
+
+    if (!/^[a-zA-Z]+$/.test(user)) {
+ errorUser.innerHTML = "El usuario solo puede contener letras";
+        return false;
+    }
+
+    errorUser.innerHTML = "";
+    return true;
 }
 
-function comprobarForm(event){
-    event.preventDefault();
+function validarPwd() {
+    var pwd = document.getElementById('pwd').value;
+    var errorPwd = document.getElementById('errorPwd');
 
-    if (validarUser() && validarPwd()){
-
-        let user = document.getElementById("user").value;
-
-        Swal.fire({
-            title: "¡Formulario válido!",
-            html: `
-                <strong>Bienvenido:</strong> ${user}<br>
-            `,
-            icon: "success"
-        }).then(() => {
-            document.getElementById("login").submit();
-        });
+    if (pwd.length < 8) {
+        errorPwd.innerHTML = "La contraseña debe tener al menos 8 caracteres";
+        return false;
     }
+
+    if (!/^[a-zA-Z0-9]+$/.test(pwd)) {
+        errorPwd.innerHTML = "La contraseña solo puede contener letras y números";
+        return false;
+    }
+
+    errorPwd.innerHTML = "";
+    return true;
 }
-document.getElementById("login").addEventListener("submit", comprobarForm);
