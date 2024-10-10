@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="./../CSS/styles.css">
 </head>
 <body>
     <form action="validacionPhp.php" method="POST" id="login" onsubmit="return comprobarForm()">
