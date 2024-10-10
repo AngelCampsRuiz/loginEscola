@@ -14,7 +14,7 @@
     <img src="../Imagenes/LogoEscuela.jpeg" id="logo">
     <h2 id="iniciar-sesion">Iniciar sesión</h2>
     </header>
-    <form action="validacionPhp.php" method="POST" id="login" onsubmit="return comprobarForm()">
+    <form action="../Validaciones/PHP/validacionPhp.php" method="POST" id="login" onsubmit="return comprobarForm()">
         <label for="user">Usuario:</label><br><br>
         <input type="text" id="user" name="user" onblur="validarUser()" onkeyup="validarUser()"><br>
         <span id="errorUser" class="error"></span><br>
@@ -38,7 +38,7 @@
         <input type="submit" name="enter" value="Verificar">
     </form>
 
-    <script type="text/javascript" src="validacionJs.js"></script>
+    <script type="text/javascript" src="../Validaciones/JS/validacionJs.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

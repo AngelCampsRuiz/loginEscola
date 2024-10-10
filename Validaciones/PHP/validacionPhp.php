@@ -50,7 +50,7 @@
             }
             exit();
         } else {
-            echo "<form id='comprobacionCheck' action='./comprobacion.php' method='POST'>";
+            echo "<form id='comprobacionCheck' action='./comprobar.php' method='POST'>";
             echo "<input type='hidden' name='user' value='" . htmlspecialchars($user) . "'>";
             echo "<input type='hidden' name='pwd' value='" . htmlspecialchars($pwd) . "'>";
             echo "</form>";
