@@ -11,4 +11,5 @@ create table 'tbl_administracio' (
 );
 
 /* Insercion de datos en la tabla de administracion */
-insert into tbl_administracio (null,'Alberto','profesors','qazQAZ123');
+insert into tbl_administracio values (null,'Alberto','profesors','qazQAZ123');
+insert into tbl_administracio values (null,'Jose','profesors','$2y$10$zvlgp9DVf0UYSh80gb4gsOBu4iLwx/2lnz6FPvpiZkZpb.Gnh6aLu');
