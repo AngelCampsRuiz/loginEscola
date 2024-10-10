@@ -15,10 +15,10 @@
                 $errores .= "&userVacio=true";
             }
         } else {
-            if(!preg_match("/^[a-zA-Z0-9]*$/", $user)){
-                $errores .= "?userError=true";
+            if(!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\s]{4,}$/', $pwd)){
+                $errores .= '?pwdError=true';
             } else {
-                $errores .= "&userError=true";
+                $errores .= '&pwdError=true';
             }
         }
 
@@ -29,7 +29,7 @@
                 $errores .= "&pwdVacio=true";
             }
         } else {
-            if(!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/', $pwd)){
+            if(!preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9\s]{4,}$/', $pwd)){
                 $errores .= '?pwdError=true';
             } else {
                 $errores .= '&pwdError=true';
