@@ -3,10 +3,10 @@ create database bd_escola;
 use bd_escola;
 
 /* Creacion de la tabla administracion */
-create table 'tbl_administracio' (
-    id int autoincrement primary key not null,
+create table tbl_administracio (
+    id int auto_increment primary key not null,
     nom varchar(25) not null,
-    rol enum("educadors","profesors","secretaria")
+    rol enum("educadors","profesors","secretaria") not null,
     pwd varchar(50) not null
 );
 
